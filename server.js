@@ -16,15 +16,19 @@ res.sendFile(path.join(__dirname,"index 2.html"));
 });
 
 
-const SECRET="ecoSecret";
+
+const SECRET = process.env.SECRET;
 const crypto = require("crypto");
 const transporter = nodemailer.createTransport({
-service: "gmail",
-auth: {
-user: "floresemiliano906@gmail.com",
-pass: "Msju hnir cnpd pfbv"
-}
-});
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS
+  }
+}); 
+const link = `${process.env.BASE_URL}/reset.html?token=${token}`;
+
+
 /* ===== REGISTRO ===== */
 app.post("/register", async (req,res)=>{
     const {email,password}=req.body;
